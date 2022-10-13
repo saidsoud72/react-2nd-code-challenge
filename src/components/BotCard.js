@@ -9,13 +9,24 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
-function BotCard({ bot, botFunction }) {
+function BotCard({ bot}) {
+  function setTheNewBot () {
+    fetch(`http://localhost:8002/bots/${bot.id}`, {
+      method:'PATCH',
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body:JSON.stringify({
+        status: "selected"
+      })
+    })
+  }
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => botFunction(bot)}
+        onClick={setTheNewBot}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
@@ -48,8 +59,9 @@ function BotCard({ bot, botFunction }) {
               <button
                 className="ui mini red button"
                 onClick={() =>
-                  console.log("add code to connect event listener")
-                }
+                  fetch(`http://localhost:8002/bots/${bot.id}`, {
+                    method:'DELETE'
+                })}
               >
                 x
               </button>

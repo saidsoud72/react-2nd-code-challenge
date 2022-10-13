@@ -1,17 +1,16 @@
 import React from "react";
-import BotCard from "./BotCard";
+import BotCard from "./BotCard"
 
-function BotCollection(props) {
-  // Your code here
-  const bots = props.bots.map((bot) => {
-    return <BotCard key={bot.id} bot={bot} botFunction={props.botFunction}/>
-  })
 
+
+function BotCollection({bot}) {
+const renderBots = bot.map(item => {
+  return < BotCard key={item.id} bot={item} />
+})
   return (
     <div className="ui four column grid">
       <div className="row">
-        {/...and here../}
-        {bots}
+        {renderBots}
       </div>
     </div>
   );
